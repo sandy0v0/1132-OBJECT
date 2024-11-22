@@ -70,12 +70,23 @@ class Animal{
 <?php
 
 
-class Cat extends Animal{
+// implements實作的意思
+class Cat extends Animal implements behavior{
     protected $type='cat';
     protected $name="Judy";
     function __construct($hair_color){
         $this->hair_color=$hair_color;
     }
+
+    function jump(){
+        echo $this->name . " jumpping 2m";
+    }
+}
+
+Interface Behavior{
+    public function run();
+    public function speed();
+    public function jump();
 }
 
 $mycat=new Cat('white');
@@ -87,8 +98,10 @@ echo "<br>";
 echo $mycat->speed();
 echo "<br>";
 $mycat->setName("judy");
+
 echo $mycat->getName();
 echo "<br>";
+echo $mycat->jump();
 
 ?>
 
