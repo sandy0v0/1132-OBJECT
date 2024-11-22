@@ -17,10 +17,10 @@ class Animal{
     // protected $type='animal' /*不能用，會異常 */;
     // private $type='animal' /*不能用，會異常 */;
 
-    protected $type='animal';  
+    protected $type='animal';
     protected $name='John';
     protected $hair_color='black';
-    protected $feet=['front-left','front-right','back-left','back-right'];
+    private $feet=['front-left','front-right','back-left','back-right'];
 
     function __construct($type,$name,$hair_color){
         // $this 代表Animal
@@ -75,8 +75,9 @@ class Animal{
 
 
 // implements實作的意思
-class Cat extends Animal implements behavior{
+class Cat extends Animal implements Behavior{
     protected $type='cat';
+    protected $name='Kitty';
     // protected $name="Judy";
     function __construct($hair_color){
         $this->hair_color=$hair_color;
@@ -85,9 +86,11 @@ class Cat extends Animal implements behavior{
     function jump(){
         echo $this->name . " jumpping 2m";
     }
+    /*  
     function getFeet(){
         return $this->feet;
     }
+    */
 }
 
 Interface Behavior{
@@ -112,6 +115,50 @@ echo $mycat->getName();
 echo "<br>";
 echo $mycat->jump();
 
+//echo Cat::name;
+?>
+
+<H1>靜態宣告</H1>
+<?php
+
+class Dog extends Animal implements Behavior{
+    protected $type='dog';
+    protected $name='Doggy';
+    protected static  $count=0;
+    //static $count=0;
+
+    function __construct($hair_color){
+        $this->hair_color=$hair_color;
+        self::$count++;
+    }
+
+    function bark(){
+        echo $this->name . " is barking";
+    }
+
+    function getFeet(){
+        return $this->feet;
+    }
+
+    static function getCount(){
+        return self::$count;
+    }
+
+    function jump(){
+        echo $this->name . " jumpping 1m";
+    }
+}
+
+echo Dog::getCount();
+
+$dog1=new Dog('brown');
+$dog2=new Dog('black');
+$dog3=new Dog('orange');
+$dog4=new Dog('white');
+$dog5=new Dog('yellow');
+
+
+echo Dog::getCount();
 ?>
 
 </body>
