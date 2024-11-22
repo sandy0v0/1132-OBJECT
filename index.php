@@ -22,7 +22,7 @@ class Animal{
     protected $hair_color='black';
     protected $feet=['front-left','front-right','back-left','back-right'];
 
-    function __contruct($ytpe,$name,$hair_color){
+    function __contruct($type,$name,$hair_color){
         // $this 代表Animal
         $this->type=$type;
         $this->name=$name;
@@ -43,7 +43,7 @@ class Animal{
     }
 
     public function setName($name){
-        return $this->name;
+        return $this->name=$name;
     }
 
 
