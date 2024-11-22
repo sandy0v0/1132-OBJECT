@@ -15,12 +15,15 @@ class Animal{
     // 要先加上封裝public的句子
 
     // protected $type='animal' /*不能用，會異常 */;
+    // private $type='animal' /*不能用，會異常 */;
 
-    public $type='animal';  
-    public $name='John';
-    public $hair_color='black';
+    protected $type='animal';  
+    protected $name='John';
+    protected $hair_color='black';
+    protected $feet=['front-left','front-right','back-left','back-right'];
 
     function __contruct($ytpe,$name,$hair_color){
+        // $this 代表Animal
         $this->type=$type;
         $this->name=$name;
         $this->hair_color=$hair_color;
@@ -35,6 +38,15 @@ class Animal{
         echo $this->name.' is running at 20km/h';
     }
 
+    public function getName(){
+        return $this->name;
+    }
+
+    public function setName($name){
+        return $this->name;
+    }
+
+
 }
 
     // 實例化(instance)，遊戲的副本也叫(instance)，｜instance 本身有複製的意思｜
@@ -43,11 +55,15 @@ class Animal{
 
     // 如果沒有加$，代表是一個值
     // 如果是$type，代表$type是可變變數
-    echo $cat->type."<br>";
-    echo $cat->name."<br>";
-    echo $cat->hair_color."<br>";
+    // echo $cat->type."<br>";
+    echo $cat->getName()."<br>";
+    // echo $cat->hair_color."<br>";
     echo $cat->run()."<br>";
     echo $cat->speed()."<br>";
+    // print_r($cat->feet);
+
+    $cat->setName('Mary');
+    echo $cat->getName();
 
 
 
