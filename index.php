@@ -46,7 +46,6 @@ class Animal{
         return $this->name=$name;
     }
 
-
 }
 
     // 實例化(instance)，遊戲的副本也叫(instance)，｜instance 本身有複製的意思｜
