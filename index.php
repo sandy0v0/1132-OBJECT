@@ -22,7 +22,7 @@ class Animal{
     protected $hair_color='black';
     protected $feet=['front-left','front-right','back-left','back-right'];
 
-    function __contruct($type,$name,$hair_color){
+    function __construct($type,$name,$hair_color){
         // $this 代表Animal
         $this->type=$type;
         $this->name=$name;
@@ -65,12 +65,35 @@ class Animal{
     $cat->setName('Mary');
     echo $cat->getName();
 
+?>
+
+<h1>繼承</h1>
+<?php
 
 
+class Cat extends Animal{
+    protected $type='cat';
+    protected $name="Judy";
+    function __construct($hair_color){
+        $this->hair_color=$hair_color;
+    }
+}
 
+$mycat=new Cat('white');
 
+echo $mycat->getName();
+echo "<br>";
+echo $mycat->run();
+echo "<br>";
+echo $mycat->speed();
+echo "<br>";
+$mycat->setName("judy");
+echo $mycat->getName();
+echo "<br>";
 
 ?>
+
+
 
 </body>
 </html>
