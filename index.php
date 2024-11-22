@@ -20,7 +20,7 @@ class Animal{
     protected $type='animal';  
     protected $name='John';
     protected $hair_color='black';
-    private $feet=['front-left','front-right','back-left','back-right'];
+    protected $feet=['front-left','front-right','back-left','back-right'];
 
     function __construct($type,$name,$hair_color){
         // $this 代表Animal
