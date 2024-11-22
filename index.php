@@ -20,7 +20,7 @@ class Animal{
     protected $type='animal';  
     protected $name='John';
     protected $hair_color='black';
-    protected $feet=['front-left','front-right','back-left','back-right'];
+    private $feet=['front-left','front-right','back-left','back-right'];
 
     function __construct($type,$name,$hair_color){
         // $this 代表Animal
@@ -43,15 +43,19 @@ class Animal{
     }
 
     public function setName($name){
-        return $this->name=$name;
+        $this->name=$name;
     }
 
+    function getFeet(){
+        return $this->feet;
+
+}
 }
 
     // 實例化(instance)，遊戲的副本也叫(instance)，｜instance 本身有複製的意思｜
     // 把new運算的結果指定給$cat，$cat是一個變數
-    $cat=new Animal('cat','kitty','white');
-
+    $cat=new Animal('cat','Kitty','white');
+    print_r($cat->getFeet());
     // 如果沒有加$，代表是一個值
     // 如果是$type，代表$type是可變變數
     // echo $cat->type."<br>";
@@ -61,7 +65,7 @@ class Animal{
     echo $cat->speed()."<br>";
     // print_r($cat->feet);
 
-    $cat->setName('Mary');
+    echo $cat->setName('Mary');
     echo $cat->getName();
 
 ?>
@@ -73,13 +77,16 @@ class Animal{
 // implements實作的意思
 class Cat extends Animal implements behavior{
     protected $type='cat';
-    protected $name="Judy";
+    // protected $name="Judy";
     function __construct($hair_color){
         $this->hair_color=$hair_color;
     }
 
     function jump(){
         echo $this->name . " jumpping 2m";
+    }
+    function getFeet(){
+        return $this->feet;
     }
 }
 
@@ -90,6 +97,8 @@ Interface Behavior{
 }
 
 $mycat=new Cat('white');
+
+print_r($mycat->getFeet());
 
 echo $mycat->getName();
 echo "<br>";
@@ -104,8 +113,6 @@ echo "<br>";
 echo $mycat->jump();
 
 ?>
-
-
 
 </body>
 </html>
