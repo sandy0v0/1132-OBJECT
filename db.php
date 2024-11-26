@@ -12,11 +12,14 @@ class DB{
         $this->pdo=new PDO($this->dsn,'root','');
     }
 
-    function q($sql){
-        return $this->pdo->query($sql)->fetchAll();
+    function all(){
+        return $this->q("SELECT * FROM $this->table");
     }
 
 
+    function q($sql){
+        return $this->pdo->query($sql)->fetchAll();
+    }
 
 }
 
@@ -29,7 +32,8 @@ function dd($array){
 // 你要抓的資料庫為(classes)，所以要注意抓的地方是哪裡
 $DEPT=new DB('classes');
 
-$dept=$DEPT->q("SELECT * FROM classes");
+// $dept=$DEPT->q("SELECT * FROM classes");
+$dept=$DEPT->all();
 
 dd($dept);
 
