@@ -1,7 +1,7 @@
 <?php
 
 class DB{
-    protected $dsn="mysql:host=localhost;charset=utf8;dbname=db14";
+    protected $dsn="mysql:host=localhost;charset=utf8;dbname=db99";
     protected $pdo;
     protected $table;
 
@@ -25,7 +25,9 @@ function dd($array){
 }
 
 
+$DEPT=new DB('classes');
 
-$DEPT=new DB('dept');
+$dept=$DEPT->q("SELECT * FROM classes");
 
-$dept=$DEPT->q("SELECT * FROM dept");
+dd($dept);
+
