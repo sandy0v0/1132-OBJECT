@@ -21,8 +21,18 @@ class DB{
      * 2. 有條件
      * 3. 其他SQL功能
     */
-    function all(){
+    function all(...$arg){
         $sql="SELECT * FROM $this->table ";
+        if(!empty($arg[0])){
+            if(is_array($arg[0])){
+
+                $where=$this->a2s($arg[0]);
+                $sql=$sql . " WHERE ". join(" && ",$where);
+            }else{
+                //$sql=$sql.$arg[0];
+                $sql .= $arg[0];
+            }
+        }
 
         return $this->fetchALL($sql);
     }
@@ -70,7 +80,7 @@ $DEPT=new DB('classes');
 // $dept=$DEPT->q("SELECT * FROM classes");
 // 原本的程式碼如上，我們新增一個function all()，類別內的方法，來完成資料庫存取
 // 取代$dept=$DEPT->q("SELECT * FROM classes")這段程式，使其更精簡
-$dept=$DEPT->all();
+$dept=$DEPT->all(['id'=>3]);
 
 dd($dept);
 
