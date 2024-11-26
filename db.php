@@ -34,6 +34,10 @@ class DB{
             }
         }
 
+        if(!empty($arg[1])){
+            $sql=$sql . $arg[1];
+        }
+
         return $this->fetchALL($sql);
     }
 
@@ -80,7 +84,7 @@ $DEPT=new DB('classes');
 // $dept=$DEPT->q("SELECT * FROM classes");
 // 原本的程式碼如上，我們新增一個function all()，類別內的方法，來完成資料庫存取
 // 取代$dept=$DEPT->q("SELECT * FROM classes")這段程式，使其更精簡
-$dept=$DEPT->all(['id'=>3]);
+$dept=$DEPT->all(" order by `id` DESC");
 
 dd($dept);
 
