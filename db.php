@@ -50,15 +50,10 @@ class DB{
                 $sql=$sql . " WHERE ". join(" && ",$where);
             }else{
                 $sql .= " WHERE `id` ='$id' ";
-            }
-      
+            }   
 
-        if(!empty($arg[1])){
-            $sql=$sql . $arg[1];
+            return $this->fetchOne($sql);
         }
-
-        return $this->fetchALL($sql);
-    }
 
 
     // update table set[ a=>1,b=>2,]
