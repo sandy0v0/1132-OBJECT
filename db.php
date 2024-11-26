@@ -41,6 +41,26 @@ class DB{
         return $this->fetchALL($sql);
     }
 
+
+    function find($id){
+        $sql="SELECT * FROM $this->table ";
+      
+            if(is_array($id)){
+                $where=$this->a2s($id);
+                $sql=$sql . " WHERE ". join(" && ",$where);
+            }else{
+                $sql .= " WHERE `id` ='$id' ";
+            }
+      
+
+        if(!empty($arg[1])){
+            $sql=$sql . $arg[1];
+        }
+
+        return $this->fetchALL($sql);
+    }
+
+
     // update table set[ a=>1,b=>2,]
     /**
     * 把陣列轉成條件字串陣列
@@ -55,12 +75,12 @@ class DB{
 
     function fetchOne($sql){
         // echo sql;
-        return $this->pdo->query($sql)->fetch();
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
 
     }
     function fetchALL($sql){
         // echo sql;
-        return $this->pdo->query($sql)->fetchALL();
+        return $this->pdo->query($sql)->fetchALL(PDO::FETCH_ASSOC);
     }
 }
 
@@ -74,17 +94,22 @@ class DB{
 function dd($array){
     echo "<pre>";
     print_r($array);
-    echo "(/pre)";
+    echo "</pre>";
 }
 
 // 你要抓的資料庫為(classes)，所以要注意抓的地方是哪裡
 // new DB 在做實體化，把藍圖的功能實體化
-$DEPT=new DB('classes');
+// $DEPT=new DB('classes');
+$DEPT=new DB('dept');
+
 
 // $dept=$DEPT->q("SELECT * FROM classes");
 // 原本的程式碼如上，我們新增一個function all()，類別內的方法，來完成資料庫存取
 // 取代$dept=$DEPT->q("SELECT * FROM classes")這段程式，使其更精簡
-$dept=$DEPT->all(" order by `id` DESC");
+
+
+// $dept=$DEPT->all(" order by `id` DESC");
+$dept=$DEPT->find(['code'=>'404']);
 
 dd($dept);
 
