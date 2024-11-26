@@ -7,21 +7,51 @@ class DB{
     protected $pdo;
     protected $table;
 
+    // 建構式construct，    指定運算子=　　，this=DB
     function __construct($table){
         $this->table=$table;
         $this->pdo=new PDO($this->dsn,'root','');
     }
 
+    // 我們把,$dept=$DEPT->q("SELECT * FROM classes")做成function
+    // 在做前construct，已經先被執行，$pdo 跟 $table 已被指定，所以我們可以新建一個All從中取得資料
+    /**
+     * 撈出全部資料(=多筆資料 where)
+     *     
+    */
     function all(){
         return $this->q("SELECT * FROM $this->table");
     }
 
+    // update table set[ a=>1,b=>2,]
+    /**
+    * 把陣列轉成條件字串陣列
+    */
+    function toWhere($array){
+        $tmp=[];
+        foreach($array as $key => $value){
+            $tmp[]="`$key`='$value'";
+        }
+        return $tmp;
+    }
 
+    function fetchOne($sql){
+        // echo sql;
+        return $this->pdo->query($sql)->fetch();
+
+    }
+    function fetchALL(){
+        // echo sql;
+        return $this->pdo->query($sql)->fetchALL();
+    }
+}
+
+/*
     function q($sql){
         return $this->pdo->query($sql)->fetchAll();
     }
+*/
 
-}
 
 function dd($array){
     echo "<pre>";
@@ -30,9 +60,12 @@ function dd($array){
 }
 
 // 你要抓的資料庫為(classes)，所以要注意抓的地方是哪裡
+// new DB 在做實體化，把藍圖的功能實體化
 $DEPT=new DB('classes');
 
 // $dept=$DEPT->q("SELECT * FROM classes");
+// 原本的程式碼如上，我們新增一個function all()，類別內的方法，來完成資料庫存取
+// 取代$dept=$DEPT->q("SELECT * FROM classes")這段程式，使其更精簡
 $dept=$DEPT->all();
 
 dd($dept);
