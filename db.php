@@ -17,17 +17,21 @@ class DB{
     // 在做前construct，已經先被執行，$pdo 跟 $table 已被指定，所以我們可以新建一個All從中取得資料
     /**
      * 撈出全部資料(=多筆資料 where)
-     *     
+     * 1. 整張資料表
+     * 2. 有條件
+     * 3. 其他SQL功能
     */
     function all(){
-        return $this->q("SELECT * FROM $this->table");
+        $sql="SELECT * FROM $this->table ";
+
+        return $this->fetchALL($sql);
     }
 
     // update table set[ a=>1,b=>2,]
     /**
     * 把陣列轉成條件字串陣列
     */
-    function toWhere($array){
+    function a2s($array){
         $tmp=[];
         foreach($array as $key => $value){
             $tmp[]="`$key`='$value'";
@@ -40,7 +44,7 @@ class DB{
         return $this->pdo->query($sql)->fetch();
 
     }
-    function fetchALL(){
+    function fetchALL($sql){
         // echo sql;
         return $this->pdo->query($sql)->fetchALL();
     }
