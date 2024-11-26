@@ -55,6 +55,19 @@ class DB{
             return $this->fetchOne($sql);
         }
 
+     function del($id){
+        $sql="DELETE FROM $this->table ";
+      
+            if(is_array($id)){
+                $where=$this->a2s($id);
+                $sql=$sql . " WHERE ". join(" && ",$where);
+            }else{
+                $sql .= " WHERE `id` ='$id' ";
+            }   
+
+            return $this->pdo->exec($sql);
+        }
+
 
     // update table set[ a=>1,b=>2,]
     /**
@@ -107,6 +120,7 @@ $DEPT=new DB('dept');
 
 // $dept=$DEPT->all(" order by `id` DESC");
 $dept=$DEPT->find(['code'=>'404']);
+$DEPT->del(['code'=>'504']);
 
 dd($dept);
 
